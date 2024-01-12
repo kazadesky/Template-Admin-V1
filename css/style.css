@@ -1,0 +1,8 @@
+:is(.sidebar.active, .sidebar-a.active) section {
+    margin-inline: 12px;
+}
+
+
+:is(.sidebar.active, .sidebar-a.active) .contact {
+    column-gap: 10px;
+}

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" id="html" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Template Admin | TailwindCSS</title>
+    <!-- google font (roboto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- boxicon -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- tailwindcss -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        roboto: 'Roboto',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="font-roboto">
+
+    <div class="relative w-full min-h-max flex">
+        <!-- left -->
+        <!-- sidebar -->
+        <div
+            class="sidebar fixed lg:w-[18%] lg:[&.active]:w-0 transition-all duration-300 ease-in-out max-lg:w-0 max-lg:[&.active]:w-[25%] max-sm:w-0 max-sm:[&.active]:w-full max-sm:[&.active]:z-50 h-[100vh] overflow-y-auto overflow-x-hidden bg-slate-900 pb-3 text-slate-50">
+            <section
+                class="relative h-max text-2xl max-sm:text-start transition-all duration-300 ease-in-out font-bold my-3 ml-4">
+                <h1>
+                    <i class="fa-solid fa-fire-flame-curved max-lg:text-3xl max-sm:text-2xl"></i>
+                    <span class="ms-1 max-sm:inline-block"><span class="text-sky-500">Budidarma </span>Programming Club</span>
+                </h1>
+                <a href="" onclick="return false" id="toggleClose"
+                    class="hidden max-sm:block absolute top-0 right-2 text-slate-800 dark:text-slate-50">
+                    <i class="fa fa-xmark"></i>
+                </a>
+            </section>
+            <section class="mt-6 max-sm:text-start transition-all duration-300 ease-in-out">
+                <span class="text-[11px] mx-4 font-bold uppercase">dashboard</span>
+                <a href="{{ route('dashboard.index') }}"
+                    class="block px-4 py-1 mt-1 text-base transition duration-300 ease-in-out hover:bg-slate-50 hover:text-slate-800 focus:bg-slate-50 focus:text-slate-800 outline-none [&.active]:bg-slate-50 [&.active]:text-slate-800 {{ Request::is('master-admin/dashboard', 'master-admin/tambah-data*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span class="ms-2 max-lg:ms-0 max-lg:text-xs">Dashboard</span>
+                </a>
+                <section class="mt-3 max-sm:text-start transition-all duration-300 ease-in-out">
+                </section>
+                <span class="text-[11px] mx-4 font-bold uppercase">content</span>
+                <div class="text-base mt-1">
+                    <a href="{{ route('data-keseluruhan.index') }}"
+                        class="block px-4 py-1 transition duration-300 ease-in-out hover:bg-slate-50 hover:text-slate-800 focus:bg-slate-50 focus:text-slate-800 outline-none [&.active]:bg-slate-50 [&.active]:text-slate-800 {{ Request::is('master-admin/data-keseluruhan*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-globe"></i>
+                        <span class="ms-2 max-lg:ms-0 max-lg:text-xs">Keseluruhan</span>
+                    </a>
+                    <a href="" id="status" onclick="return false"
+                        class="block px-4 py-1 transition duration-300 ease-in-out hover:bg-slate-50 hover:text-slate-800 focus:text-slate-800 focus:bg-slate-50 outline-none [&.active]:bg-slate-50 [&.active]:text-slate-800 {{ Request::is('master-admin/data-keluarga*', 'master-admin/data-partai*', 'master-admin/data-umum*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-folder"></i>
+                        <span class="ms-2 max-lg:ms-0 max-lg:text-xs">Status</span>
+                    </a>
+                    <div id="dropdownStatus"
+                        class="hidden relative overflow-hidden bg-slate-100 text-slate-800 text-sm mb-1 w-full">
+                        <a href="{{ route('data-keluarga.index') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/data-keluarga*') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Keluarga</span>
+                        </a>
+                        <a href="{{ route('data-partai.index') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/data-partai*') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Partai</span>
+                        </a>
+                        <a href="{{ route('data-umum.index') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/data-umum*') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Umum</span>
+                        </a>
+                    </div>
+                    <a href="" id="kecamatan" onclick="return false"
+                        class="block px-4 py-1 transition duration-300 ease-in-out hover:bg-slate-50 hover:text-slate-800 focus:bg-slate-50 focus:text-slate-800 outline-none [&.active]:bg-slate-50 [&.active]:text-slate-800 {{ Request::is('master-admin/kecamatan/*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-folder"></i>
+                        <span class="ms-2 max-lg:ms-0 max-lg:text-xs">Kecamatan</span>
+                    </a>
+                    <div id="dropdownKecamatan"
+                        class="hidden relative overflow-hidden bg-slate-100 text-slate-800 text-sm mb-1 w-full">
+                        <a href="{{ route('babul.makmur') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/babul-makmur') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Babul Bakmur</span>
+                        </a>
+                        <a href="{{ route('babul.rahmah') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/babul-rahmah') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Babul Rahmah</span>
+                        </a>
+                        <a href="{{ route('babussalam') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/babussalam') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Babussalam</span>
+                        </a>
+                        <a href="{{ route('badar') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/badar') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Badar</span>
+                        </a>
+                        <a href="{{ route('bambel') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/bambel') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Bambel</span>
+                        </a>
+                        <a href="{{ route('bukit.tusam') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/bukit-tusam') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Bukit Tusam</span>
+                        </a>
+                        <a href="{{ route('darul.hasanah') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/darul-hasanah') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Darul Hasanah</span>
+                        </a>
+                        <a href="{{ route('deleng.pokhkisen') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/deleng-pokhkisen') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Deleng Pokhkisen</span>
+                        </a>
+                        <a href="{{ route('ketambe') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/ketambe') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Ketambe</span>
+                        </a>
+                        <a href="{{ route('lawe.alas') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/lawe-alas') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Lawe Alas</span>
+                        </a>
+                        <a href="{{ route('lawe.bulan') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/lawe-bulan') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Lawe Bulan</span>
+                        </a>
+                        <a href="{{ route('lawe.sigala') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/lawe-sigala') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Lawe Sigala</span>
+                        </a>
+                        <a href="{{ route('lawe.sumur') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/lawe-sumur') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Lawe Sumur</span>
+                        </a>
+                        <a href="{{ route('leuser') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/leuser') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Leuser</span>
+                        </a>
+                        <a href="{{ route('semadam') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/semadam') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Semadam</span>
+                        </a>
+                        <a href="{{ route('tanoh.alas') }}"
+                            class="px-4 py-2 block transition duration-300 hover:bg-slate-300 [&.active]:bg-slate-300 outline-none focus:bg-slate-300 focus:text-slate-800 {{ Request::is('master-admin/kecamatan/tanoh-alas') ? 'active' : '' }}">
+                            <i class="fa-solid fa-list"></i>
+                            <span class="ms-1">Tanoh Alas</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section class="mt-3 max-sm:text-start transition-all duration-300 ease-in-out">
+                <span class="text-[11px] mx-4 font-bold uppercase">Support</span>
+                <div class="mt-1 text-base">
+                    <a href="{{ route('kabupaten.index') }}"
+                        class="block px-4 py-1 transition duration-300 ease-in-out hover:bg-slate-50 hover:text-slate-800 focus:bg-slate-50 focus:text-slate-800 outline-none [&.active]:bg-slate-50 [&.active]:text-slate-800 {{ Request::is('master-admin/kabupaten') ? 'active' : '' }}">
+                        <i class="fa-solid fa-file-invoice"></i>
+                        <span class="ms-2 max-lg:ms-0 max-lg:text-xs">Kabupaten</span>
+                    </a>
+                    <a href="{{ route('kecamatans.index') }}"
+                        class="block px-4 py-1 transition duration-300 ease-in-out hover:bg-slate-50 hover:text-slate-800 focus:bg-slate-50 focus:text-slate-800 outline-none [&.active]:bg-slate-50 [&.active]:text-slate-800 {{ Request::is('master-admin/kecamatans') ? 'active' : '' }}">
+                        <i class="fa-solid fa-file-invoice"></i>
+                        <span class="ms-2 max-lg:ms-0 max-lg:text-xs">Kecamatan</span>
+                    </a>
+                    <a href="{{ route('desa.index') }}"
+                        class="block px-4 py-1 transition duration-300 ease-in-out hover:bg-slate-50 hover:text-slate-800 focus:bg-slate-50 focus:text-slate-800 outline-none [&.active]:bg-slate-50 [&.active]:text-slate-800 {{ Request::is('master-admin/desa') ? 'active' : '' }}">
+                        <i class="fa-solid fa-file-invoice"></i>
+                        <span class="ms-2 max-lg:ms-0 max-lg:text-xs">Desa</span>
+                    </a>
+                    <a href="{{ route('data-desa.index') }}"
+                        class="block px-4 py-1 transition duration-300 ease-in-out hover:bg-slate-50 hover:text-slate-800 focus:bg-slate-50 focus:text-slate-800 outline-none [&.active]:bg-slate-50 [&.active]:text-slate-800 {{ Request::is('master-admin/data-desa') ? 'active' : '' }}">
+                        <i class="fa-solid fa-file-invoice"></i>
+                        <span class="ms-2 max-lg:ms-0 max-lg:text-xs">Data Desa</span>
+                    </a>
+                </div>
+            </section>
+            <section class="mt-3 max-sm:text-start transition-all duration-300 ease-in-out">
+                <span class="text-[11px] mx-4 font-bold uppercase">Other</span>
+                <div class="mt-1 text-base">
+                    <a href="{{ route('arsip.index') }}"
+                        class="block px-4 py-1 transition duration-300 ease-in-out hover:text-slate-800 hover:bg-slate-50 focus:text-slate-800 focus:bg-slate-50 outline-none [&.active]:text-slate-800 [&.active]:bg-slate-50 {{ Request::is('master-admin/arsip') ? 'active' : '' }}">
+                        <i class="fa-solid fa-box-archive"></i>
+                        <span class="ms-2 max-lg:ms-0 max-lg:text-xs">Arsip</span>
+                    </a>
+                    <a href="{{ route('export.index') }}"
+                        class="block px-4 py-1 transition duration-300 ease-in-out hover:text-slate-800 hover:bg-slate-50 focus:text-slate-800 focus:bg-slate-50 outline-none [&.active]:text-slate-800 [&.active]:bg-slate-50 {{ Request::is('master-admin/export') ? 'active' : '' }}">
+                        <i class="fa-solid fa-file-export"></i>
+                        <span class="ms-2 max-lg:ms-0 max-lg:text-xs">Export</span>
+                    </a>
+                    <a href="{{ route('account.index') }}"
+                        class="block px-4 py-1 transition duration-300 ease-in-out hover:text-slate-800 hover:bg-slate-50 focus:text-slate-800 focus:bg-slate-50 outline-none [&.active]:text-slate-800 [&.active]:bg-slate-50 {{ Request::is('master-admin/account') ? 'active' : '' }}">
+                        <i class="fa-solid fa-users"></i>
+                        <span class="ms-2 max-lg:ms-0 max-lg:text-xs">Account</span>
+                    </a>
+                    <a href=""
+                        class="block px-4 py-1 transition duration-300 ease-in-out hover:text-slate-800 hover:bg-slate-50 focus:text-slate-800 focus:bg-slate-50 outline-none [&.active]:text-slate-800 [&.active]:bg-slate-50">
+                        <i class="fa-solid fa-gears"></i>
+                        <span class="ms-2 max-lg:ms-0 max-lg:text-xs">Setting</span>
+                    </a>
+                </div>
+            </section>
+            <section class="mt-3 mx-4 max-sm:text-start transition-all duration-300 ease-in-out">
+                <span class="text-[11px] font-bold uppercase max-lg:ms-4">contact</span>
+                <ul class="contact flex gap-x-4 max-sm:text-base text-2xl mt-2">
+                    <li class="max-lg:ms-4">
+                        <a href="https://api.whatsapp.com/send/?phone=%2B6282267717522&text&type=phone_number&app_absent=0"
+                            target="_blank"
+                            class="transition duration-300 ease-in-out hover:text-sky-500 focus:text-sky-500 outline-none">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="https://www.instagram.com/kaza_desky/" target="_blank"
+                            class="transition duration-300 ease-in-out hover:text-sky-500 focus:text-sky-500 outline-none">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="https://www.facebook.com/moch.kaza.desky" target="_blank"
+                            class="transition duration-300 ease-in-out hover:text-sky-500 focus:text-sky-500 outline-none">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="https://github.com/kazadesky" target="_blank"
+                            class="transition duration-300 ease-in-out hover:text-sky-500 focus:text-sky-500 outline-none">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <!-- rigth -->
+        <div
+            class="content relative lg:w-[82%] lg:[&.active]:w-full lg:[&.active]:ms-0 transition-all duration-300 ease-in-out lg:ms-[18%] max-lg:w-full max-lg:[&.active]:w-[75%] max-lg:ms-0 max-lg:[&.active]:ms-[25%] max-sm:w-full max-sm:ms-0 max-sm:[&.active]:w-full max-sm:[&.active]:ms-0 min-h-[100vh] dark:bg-slate-800">
+            <!-- navbar -->
+            <nav class="flex items-center w-full shadow bg-slate-50 h-[60px] px-5 dark:bg-slate-900 dark:text-slate-50">
+                <a href="" id="toggleSide" onclick="return false"
+                    class="text-xl outline-none transition duration-200 ease-in-out hover:text-sky-500 focus:text-sky-500">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <form action="" method="get"
+                    class="flex ms-3 {{ Request::is(['master-admin/dashboard', 'master-admin/data-keseluruhan*', 'master-admin/data-keluarga/*', 'master-admin/data-partai/*', 'master-admin/data-umum/*', 'master-admin/kabupaten*', 'master-admin/kecamatans*', 'master-admin/desa*', 'master-admin/data-desa*', 'master-admin/arsip', 'master-admin/account*', 'master-admin/export', 'master-admin/setting']) ? 'hidden' : '' }}">
+                    <input type="search" name="search" id="search" pattern="[A-Za-z, 0-9]{3,}"
+                        class="w-64 max-sm:w-10 max-sm:focus:w-[150px] max-sm:valid:w-[150px] max-sm:text-xs max-sm:h-8 h-10 px-2 rounded-l-md text-sm border border-sky-500 outline-none transition-all duration-250 max-sm:duration-300 max-sm:ease-in-out focus:border-2 dark:bg-slate-900 dark:text-slate-50"
+                        placeholder="Search..." required>
+                    <button type="submit"
+                        class="px-4 bg-sky-500 text-sm max-sm:text-xs max-sm:px-3 text-slate-50 rounded-r-md transition duration-300 hover:bg-sky-600 focus:bg-sky-600 outline-none">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+                <ul class="flex gap-x-3 max-sm:gap-x-2 ms-auto">
+                    <li class="text-2xl mt-[4px] max-sm:mt-0">
+                        <a href="" id="darkMode" onclick="return false"
+                            class="outline-none transition duration-200 ease-in-out hover:text-sky-500 focus:text-sky-500"></a>
+                    </li>
+                    <li class="text-xl">
+                        <a href="" onclick="return false" id="toggleDropdown" class="rounded-full">
+                            <img src="img/user.png" alt="user icon" class="w-[35px] max-sm:w-[30px]">
+                        </a>
+                        <div
+                            class="dropdownNav hidden absolute overflow-hidden right-4 bg-white dark:bg-slate-900 shadow rounded-md text-base mt-2 w-[150px] z-50">
+                            <a href="" onclick="return false"
+                                class="px-3 py-2 block transition duration-300 hover:bg-slate-100 dark:hover:text-slate-800 dark:focus:text-slate-800 outline-none">
+                                <i class="fa fa-user"></i>
+                                <span>Profil</span>
+                            </a>
+                            <hr>
+                            <a href="" onclick="return false"
+                                class="px-3 py-2 block transition duration-300 hover:bg-slate-100 dark:hover:text-slate-800 dark:focus:text-slate-800 outline-none">
+                                <i class="fa fa-gear"></i>
+                                <span>Setting</span>
+                            </a>
+                            <hr>
+                            <form action="{{ route('logout') }}" method="post">
+                                <button type="submit"
+                                    class="block px-3 py-2 w-full flex flex-start transition duration-300 hover:bg-slate-100 dark:hover:text-slate-800 dark:focus:text-slate-800 outline-none">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    <span class="-mt-[3px] ms-1">Logout</span>
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <!-- content -->
+            <main class="mt-5 mx-5">
+
+            </main>
+        </div>
+    </div>
+
+    <!-- js -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
